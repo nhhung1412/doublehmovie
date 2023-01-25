@@ -1,9 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import { Layout } from './components/Layout'
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   </React.StrictMode>,
 )
