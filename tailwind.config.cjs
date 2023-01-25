@@ -12,8 +12,8 @@ module.exports = {
       colors: {
         gray: "#949cb0",
         blueHover: "#24baef",
-        bgMain: "#131722",
-        bgPrimary: "#1B212D"
+        bgMain: "#1a1a1a",
+        bgPrimary: "#060606"
       },
       height: {
         'header': "80px"

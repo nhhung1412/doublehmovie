@@ -16,16 +16,24 @@ const ListMenuHeader: React.FC = () => {
   return (
     <>
       <li>
-        <NavLink to="/phimle">Phim lẻ</NavLink>
+        <NavLink to="/phimle" className="hover:text-red-600 transition">
+          Phim lẻ
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/phimbo">Phim bộ</NavLink>
+        <NavLink to="/phimbo" className="hover:text-red-600 transition">
+          Phim bộ
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/phimchieurap">Phim chiếu rạp</NavLink>
+        <NavLink to="/phimchieurap" className="hover:text-red-600 transition">
+          Phim chiếu rạp
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/theloai">Thể loại</NavLink>
+        <NavLink to="/theloai" className="hover:text-red-600 transition">
+          Thể loại
+        </NavLink>
       </li>
     </>
   )
@@ -57,7 +65,7 @@ export const Header: React.FC = () => {
             />
           )}
           <div
-            className={`absolute top-[80px]  bottom-0 bg-white z-[100] h-[100vh] w-1/2 md:w-1/3 lg:hidden transition-all ease-in-out duration-[400ms] ${
+            className={`absolute top-[80px]  bottom-0 bg-white z-[100] h-[100vh] w-1/2 md:w-1/3 lg:hidden transition ${
               isOpen ? 'left-0' : 'left-[-450px]'
             }`}
           >
