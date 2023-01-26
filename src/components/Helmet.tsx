@@ -1,5 +1,14 @@
-import React from 'react'
+import { useEffect } from 'react'
 
-export const Helmet = () => {
-  return <div>Helmet</div>
+interface Iprops {
+  title: string
+  children: JSX.Element
+}
+
+export const Helmet = ({ title, children }: Iprops) => {
+  useEffect(() => {
+    document.title = 'DoubleHMovie - ' + title
+  }, [])
+
+  return <div>{children}</div>
 }
