@@ -10,7 +10,7 @@ module.exports = {
         "openSans": ["Open Sans", "sans-serif"]
       },
       colors: {
-        gray: "#949cb0",
+        gray: "#504d49",
         blueHover: "#24baef",
         bgMain: "#1a1a1a",
         bgPrimary: "#060606"
