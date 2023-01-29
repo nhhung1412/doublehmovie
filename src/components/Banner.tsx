@@ -5,22 +5,22 @@ import { motion } from 'framer-motion'
 import { requests } from '../api/requests'
 import { axiosClient } from '../api/axios'
 
-interface Imovies {
-  backdrop_path: string
-  title: string
-  release_date: string
-  overview: string
-}
+import { Imovies } from '../Type'
 
-export const Banner = () => {
+export const Banner: React.FC = () => {
   const [movies, setMovies] = useState<Imovies[]>([])
 
   const movie = movies[Math.floor(Math.random() * movies.length)]
 
   useEffect(() => {
-    axiosClient.get(requests.requestMovie).then((response) => {
-      setMovies(response.data.results)
-    })
+    axiosClient
+      .get(requests.requestMovie)
+      .then((response) => {
+        setMovies(response.data.results)
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
   }, [])
   return (
     <div className="relative pt-[45%]">

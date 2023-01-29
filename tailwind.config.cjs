@@ -13,7 +13,8 @@ module.exports = {
         gray: "#504d49",
         blueHover: "#24baef",
         bgMain: "#1a1a1a",
-        bgPrimary: "#060606"
+        bgPrimary: "#060606",
+        bg06: "rgba(0,0,0,.6)"
       },
       height: {
         'header': "80px"
