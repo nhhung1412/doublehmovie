@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home } from '../pages/Home'
-import { MovieDetail } from '../components/MovieDetail'
-import { PageNotFound } from '../components/PageNotFound'
+import { MovieDetail } from '../pages/MovieDetail'
+import { PageNotFound } from '../pages/PageNotFound'
 
 export const Router = () => {
   return (

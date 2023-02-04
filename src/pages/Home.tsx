@@ -9,28 +9,30 @@ export const Home: React.FC = () => {
     <Helmet title="Home">
       <Fragment>
         <Banner />
-        <MovieListing
-          title="Phổ biến"
-          fetchUrl={requests.requestPopular}
-          category={['hàn quốc', 'trung quốc', 'âu mỹ', 'việt nam']}
-        />
-        <MovieListing
-          title="Sắp chiếu"
-          fetchUrl={requests.requestUpcoming}
-          category={['hành động', 'tình cảm', 'hài hước', 'ma - kinh dị']}
-        />
-        <MovieListing
-          title="Phim chiếu rạp"
-          fetchUrl={requests.requestMovieTheatres}
-          category={['2022', '2021', '2020', '2019']}
-        />
-        <MovieListing title="Phim lẻ" fetchUrl={requests.requestTrending} />
-        <MovieListing title="Phim bộ" fetchUrl={requests.requestTVseries} />
-        <MovieListing
-          title="Thịnh hành"
-          fetchUrl={requests.requestTopRated}
-          category={['phim lẻ thịnh hành', 'phim bộ thịnh hành']}
-        />
+        <div className="lg:px-20 md:px-14 px-10 my-10">
+          <MovieListing
+            title="Phổ biến"
+            fetchUrl={requests.requestPopular}
+            category={['hàn quốc', 'trung quốc', 'âu mỹ', 'việt nam']}
+          />
+          <MovieListing
+            title="Sắp chiếu"
+            fetchUrl={requests.requestUpcoming}
+            category={['hành động', 'tình cảm', 'hài hước', 'ma - kinh dị']}
+          />
+          <MovieListing
+            title="Phim chiếu rạp"
+            fetchUrl={requests.requestMovieTheatres}
+            category={['2022', '2021', '2020', '2019']}
+          />
+          <MovieListing title="Phim lẻ" fetchUrl={requests.requestTrending} />
+          <MovieListing title="Phim bộ" fetchUrl={requests.requestTVseries} />
+          <MovieListing
+            title="Thịnh hành"
+            fetchUrl={requests.requestTopRated}
+            category={['phim lẻ thịnh hành', 'phim bộ thịnh hành']}
+          />
+        </div>
       </Fragment>
     </Helmet>
   )

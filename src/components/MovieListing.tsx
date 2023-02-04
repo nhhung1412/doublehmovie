@@ -20,18 +20,24 @@ export const MovieListing: React.FC<IMovieListing> = ({
   const [movies, setMovies] = useState<Imovies[]>([])
 
   useEffect(() => {
-    axiosClient
-      .get(fetchUrl)
-      .then((response) => {
-        setMovies(response.data.results)
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
+    const fetchMovies = async () => {
+      await axiosClient
+        .get(fetchUrl)
+        .then((response) => {
+          setMovies(response.data.results)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+    }
+
+    return () => {
+      fetchMovies()
+    }
   }, [])
 
   return (
-    <div className="lg:container-fluid my-10 px-6 md:px-8mx-auto">
+    <div>
       {/* top */}
       <div className="flex items-center justify-between my-6 md:gap-8 lg:gap-10 md:my-8 lg:my-10">
         <div className="flex justify-center  items-center gap-10">
@@ -59,16 +65,30 @@ export const MovieListing: React.FC<IMovieListing> = ({
 
       {/* bottom */}
       <Swiper
+        slidesPerView={'auto'}
         spaceBetween={10}
-        slidesPerGroup={1}
         navigation={true}
         modules={[Navigation]}
-        loop={true}
-        loopFillGroupWithBlank={true}
         breakpoints={{
-          768: {
-            width: 768,
+          320: {
+            width: 320,
+            slidesPerView: 1,
+          },
+          600: {
+            width: 600,
             slidesPerView: 2,
+          },
+          991: {
+            width: 991,
+            slidesPerView: 3,
+          },
+          1240: {
+            width: 1240,
+            slidesPerView: 3,
+          },
+          1600: {
+            width: 1600,
+            slidesPerView: 4,
           },
         }}
       >

@@ -4,11 +4,12 @@ import { AiFillPlayCircle } from 'react-icons/ai'
 
 import { ImovieCard } from '../Type'
 import { Fragment } from 'react'
+import { Rating } from './Rating'
 
 export const MovieCard: React.FC<ImovieCard> = ({ movie }) => {
   return (
     <Fragment>
-      <Link to="/" className="group">
+      <Link to={`/movie/${movie?.id}`} className="group">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}
           alt={movie?.title}
@@ -23,6 +24,10 @@ export const MovieCard: React.FC<ImovieCard> = ({ movie }) => {
             "
         >
           <AiFillPlayCircle />
+        </span>
+
+        <span className="absolute text-yellow-400 top-1 left-1">
+          <Rating vote={movie?.vote_average} />
         </span>
       </Link>
       <span className="absolute bg-gradient-to-r from-red-600 to-yellow-400 top-1 right-1 px-2 rounded-xl truncate">

@@ -14,4 +14,8 @@ export const requests: ImovieApi = {
 
 // https://api.themoviedb.org/3/movie/315162/videos?api_key=80193534f3bdf091de78dd365b967875&language=en-US
 
-// https://api.themoviedb.org/3/movie/315162/watch/providers?api_key=80193534f3bdf091de78dd365b967875
+
+// https://api.themoviedb.org/3/movie/popular?api_key=80193534f3bdf091de78dd365b967875&language=en-US&page=1
+
+// movie detail
+// https://api.themoviedb.org/3/movie/315162/videos?api_key=80193534f3bdf091de78dd365b967875&language=en-US

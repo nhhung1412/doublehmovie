@@ -6,6 +6,7 @@ export interface Imovies {
     id: string
     name: string
     first_air_date: string
+    vote_average: number
 }
 
 export interface ImovieCard {
@@ -26,4 +27,13 @@ export interface ImovieApi {
     requestMovie: string,
     requestMovieTheatres: string,
     requestTVseries: string
+}
+
+
+export interface Ivote {
+    vote: number
+}
+
+export interface IMovieState {
+    movies: Imovies[]
 }
