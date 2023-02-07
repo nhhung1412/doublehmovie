@@ -11,29 +11,21 @@ import { IoMdArrowDroprightCircle } from 'react-icons/io'
 
 import { Imovies, IMovieListing } from '../Type'
 import { MovieCard } from './MovieCard'
+import { Link } from 'react-router-dom'
 
 export const MovieListing: React.FC<IMovieListing> = ({
   title,
   fetchUrl,
   category,
+  linkUrl,
 }) => {
   const [movies, setMovies] = useState<Imovies[]>([])
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      await axiosClient
-        .get(fetchUrl)
-        .then((response) => {
-          setMovies(response.data.results)
-        })
-        .catch((error) => {
-          console.log(error.message)
-        })
-    }
-
-    return () => {
-      fetchMovies()
-    }
+    axiosClient
+      .get(fetchUrl)
+      .then((res) => setMovies(res?.data.results))
+      .catch((error) => console.log(error.message))
   }, [])
 
   return (
@@ -58,7 +50,9 @@ export const MovieListing: React.FC<IMovieListing> = ({
         </div>
 
         <button className="py-1 px-2 md:py-2 md:px-3 bg-gray text-white hover:text-red-600 flex gap-1 transition">
-          <span className="text-[10px] lg:text-xs font-bold">Xem tất cả</span>
+          <Link to={linkUrl} className="text-[10px] lg:text-xs font-bold">
+            Xem tất cả
+          </Link>
           <IoMdArrowDroprightCircle />
         </button>
       </div>

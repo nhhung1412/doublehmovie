@@ -17,6 +17,7 @@ export interface IMovieListing {
     title: string
     fetchUrl: string
     category?: string[]
+    linkUrl: string
 }
 
 export interface ImovieApi {
@@ -26,7 +27,7 @@ export interface ImovieApi {
     requestUpcoming: string,
     requestMovie: string,
     requestMovieTheatres: string,
-    requestTVseries: string
+    requestTVseries: string,
 }
 
 
@@ -36,4 +37,34 @@ export interface Ivote {
 
 export interface IMovieState {
     movies: Imovies[]
+}
+
+export interface IActor {
+    id: string
+    profile_path: string
+    name: string
+    character: string
+}
+
+
+export interface IMovieDetail {
+    title: string
+    overview: string
+    poster_path: string
+    backdrop_path: string
+    release_date: string
+    vote_average: number
+    status: string
+    genres: Iitem[]
+
+}
+
+interface Iitem {
+    name: string
+    id: string
+}
+
+export interface IapiImg {
+    originalImage: (imgPath: string) => string
+    w500Image: (imgPath: string) => string
 }

@@ -11,6 +11,7 @@ module.exports = {
       },
       colors: {
         gray: "#504d49",
+        textGray: "#b5b5b5",
         blueHover: "#24baef",
         bgMain: "#1a1a1a",
         bgPrimary: "#060606",
@@ -21,7 +22,7 @@ module.exports = {
       },
       boxShadow: {
         'shadowHover': '0px 0px 0px 1px #80bdff',
-        'shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px;'
+        'shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px;',
       }
     },
   },

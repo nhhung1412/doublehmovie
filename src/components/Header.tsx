@@ -43,6 +43,7 @@ export const Header: React.FC = () => {
   const [isOpen, SetIsOpen] = useState<boolean>(false)
   const [openSearch, SetOpenSearch] = useState<boolean>(false)
   const [openUser, SetOpenUser] = useState<boolean>(false)
+  const [keywords, setKeywords] = useState<string>('')
 
   const handleToggle = () => {
     SetIsOpen(!isOpen)
@@ -111,6 +112,8 @@ export const Header: React.FC = () => {
                         className="outline-none px-2 placeholder:text-sm w-full"
                         placeholder="Search...."
                         required
+                        value={keywords}
+                        onChange={(e) => setKeywords(e.target.value)}
                       />
                       <button type="submit">
                         <AiOutlineSearch className="text-2xl " />

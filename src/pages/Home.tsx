@@ -14,23 +14,35 @@ export const Home: React.FC = () => {
             title="Phổ biến"
             fetchUrl={requests.requestPopular}
             category={['hàn quốc', 'trung quốc', 'âu mỹ', 'việt nam']}
+            linkUrl="/phimle"
           />
           <MovieListing
             title="Sắp chiếu"
             fetchUrl={requests.requestUpcoming}
             category={['hành động', 'tình cảm', 'hài hước', 'ma - kinh dị']}
+            linkUrl="/phimle"
           />
           <MovieListing
             title="Phim chiếu rạp"
             fetchUrl={requests.requestMovieTheatres}
             category={['2022', '2021', '2020', '2019']}
+            linkUrl="/phimchieurap"
           />
-          <MovieListing title="Phim lẻ" fetchUrl={requests.requestTrending} />
-          <MovieListing title="Phim bộ" fetchUrl={requests.requestTVseries} />
+          <MovieListing
+            title="Phim lẻ"
+            fetchUrl={requests.requestTrending}
+            linkUrl="/phimle"
+          />
+          <MovieListing
+            title="Phim bộ"
+            fetchUrl={requests.requestTVseries}
+            linkUrl="/phimbo"
+          />
           <MovieListing
             title="Thịnh hành"
             fetchUrl={requests.requestTopRated}
             category={['phim lẻ thịnh hành', 'phim bộ thịnh hành']}
+            linkUrl="/phimle"
           />
         </div>
       </Fragment>

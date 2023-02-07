@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 
 interface Iprops {
   title: string
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 export const Helmet = ({ title, children }: Iprops) => {
   useEffect(() => {
-    document.title = 'DoubleHMovie - ' + title
-  }, [])
+    window.scrollTo(0, 0)
+    document.title = 'DoubleHMovie/' + title
+  }, [title])
 
   return <div>{children}</div>
 }
