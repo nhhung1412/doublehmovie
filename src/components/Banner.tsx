@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { MdPlaylistAddCheck } from 'react-icons/md'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import 'swiper/css'
@@ -38,7 +40,7 @@ export const Banner: React.FC = () => {
         spaceBetween={0}
         modules={[Autoplay]}
         autoplay={{
-          delay: 4000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       >
@@ -61,7 +63,7 @@ export const Banner: React.FC = () => {
                     className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-transparent text-red-600 border-red-600 border w-max duration-200"
                   >
                     <span className="md:text-base text-xs font-semibold">
-                      Play
+                      Chi tiết
                     </span>
                   </motion.button>
                 </Link>
@@ -69,9 +71,10 @@ export const Banner: React.FC = () => {
                   whileTap={{ scale: '1.2' }}
                   className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-red-600 text-white w-max duration-200"
                 >
-                  <span className="md:text-base text-xs font-semibold">
-                    Watch later
+                  <span className="md:text-base text-xs font-semibold mr-1">
+                    Xem sau
                   </span>
+                  <MdPlaylistAddCheck className="text-2xl" />
                 </motion.button>
               </div>
               <p className="text-[10px] md:text-xs lg:text-sm text-gray">

@@ -59,7 +59,6 @@ export const TopRatedMovie: React.FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="border my-5 border-gray"></div>
     </>
   )
 }

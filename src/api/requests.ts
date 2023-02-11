@@ -36,3 +36,7 @@ export const apiImg: IapiImg = {
 //https://api.themoviedb.org/3/movie/505642/videos?api_key=80193534f3bdf091de78dd365b967875&language=en-US
 
 // https://api.themoviedb.org/3/genre/movie/list?api_key=80193534f3bdf091de78dd365b967875&language=en-US
+
+// https://api.themoviedb.org/3/search/movie?api_key=80193534f3bdf091de78dd365b967875&query=Jack+Reacher
+
+// https://api.themoviedb.org/3/movie/505642/credits?api_key=80193534f3bdf091de78dd365b967875&language=en-US

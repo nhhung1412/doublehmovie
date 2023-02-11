@@ -72,7 +72,6 @@ export const Actor: React.FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="border my-5 border-gray"></div>
     </div>
   )
 }

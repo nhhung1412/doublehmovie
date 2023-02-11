@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 import { motion } from 'framer-motion'
+
+import { AiFillPlayCircle } from 'react-icons/ai'
 
 import { axiosClient } from '../api/axios'
 import { API_KEY, apiImg } from '../api/requests'
@@ -10,13 +12,13 @@ import { API_KEY, apiImg } from '../api/requests'
 import { Rating } from '../components/Rating'
 import { Helmet } from '../components/Helmet'
 import { SimilarMovies } from '../components/MovieDetail/SimilarMovies'
-import { Comment } from '../components/MovieDetail/Comment'
 import { Actor } from '../components/MovieDetail/Actor'
 import { IMovieDetail } from '../Type'
 import { TopRatedMovie } from '../components/MovieDetail/TopRatedMovie'
 
 export const MovieDetail: React.FC = () => {
   const [movieDetail, setMovieDetail] = useState<IMovieDetail>(Object)
+
   const { id } = useParams()
 
   useEffect(() => {
@@ -25,6 +27,8 @@ export const MovieDetail: React.FC = () => {
       .then((res) => setMovieDetail(res.data))
       .catch((error) => console.log(error.message))
   }, [id])
+
+  console.log(movieDetail)
 
   const {
     title,
@@ -73,18 +77,23 @@ export const MovieDetail: React.FC = () => {
           />
           <div className="flex flex-col md:mt-4 lg:mt-10 gap-2 lg:gap-5">
             <div className="flex gap-5 justify-center md:order-1 md:justify-start">
-              <motion.button
-                whileTap={{ scale: '1.2' }}
-                className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-transparent text-red-600 border-red-600 border w-max duration-200"
-              >
-                <span className="text-base font-semibold">Watch</span>
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: '1.2' }}
-                className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-red-600 text-white w-max duration-200"
-              >
-                <span className="text-base font-semibold">Trailer</span>
-              </motion.button>
+              <Link to={`/watch/${id}`}>
+                <motion.button
+                  whileTap={{ scale: '1.2' }}
+                  className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-transparent text-red-600 border-red-600 border w-max duration-200"
+                >
+                  <span className="text-base font-semibold mr-1">Xem</span>
+                  <AiFillPlayCircle className="text-2xl" />
+                </motion.button>
+              </Link>
+              <Link to={`/watch/${id}`}>
+                <motion.button
+                  whileTap={{ scale: '1.2' }}
+                  className="flex items-center py-2 lg:py-3 lg:px-6 px-4 bg-red-600 text-white w-max duration-200"
+                >
+                  <span className="text-base font-semibold">Xem Trailer</span>
+                </motion.button>
+              </Link>
             </div>
             <h1 className="text-3xl lg:text-5xl text-red-600 font-semibold">
               {title}
@@ -120,17 +129,15 @@ export const MovieDetail: React.FC = () => {
         </div>
       </div>
 
-      <div className="mx-5 md:mx-20 lg:mx-40">
+      <div className="mx-5 md:mx-20 lg:mx-40 my-5">
         {/* Actor */}
         <Actor />
-
+        <div className="border my-5 border-gray"></div>
         {/* Similar */}
         <SimilarMovies />
-
+        <div className="border my-5 border-gray"></div>
         {/* Top Rated */}
         <TopRatedMovie />
-        {/* Comment */}
-        <Comment />
       </div>
     </Helmet>
   )

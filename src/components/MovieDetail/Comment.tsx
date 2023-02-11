@@ -4,21 +4,7 @@ import { useParams } from 'react-router-dom'
 import { axiosClient } from '../../api/axios'
 import { API_KEY, apiImg } from '../../api/requests'
 import { Rating } from '../Rating'
-
-interface Ireviews {
-  length: number
-  author: string
-  author_details: IauthorDetail
-  content: string
-  created_at: string
-}
-
-interface IauthorDetail {
-  name: string
-  username: string
-  avatar_path: string
-  rating: number
-}
+import { Ireviews } from '../../Type'
 
 export const Comment: React.FC = () => {
   const [reviews, setReviews] = useState<Ireviews[]>([])
@@ -35,6 +21,27 @@ export const Comment: React.FC = () => {
   return (
     <div className="bg-white text-black rounded-md my-5">
       <h1 className="p-2 text-xl font-bold">Bình luận ({reviews?.length})</h1>
+
+      <div className="flex gap-5 p-5 border-b border-b-textGray">
+        <img
+          src="https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg"
+          alt=""
+          className="w-10 h-10 object-cover rounded-full"
+        />
+        <form className="flex flex-col gap-2 w-full">
+          <span className="font-bold">User</span>
+          <textarea className="w-full h-20 md:h-24 lg:h-28 py-2 px-4 border border-textGray rounded focus-within:border-blueHover outline-none"></textarea>
+          <div>
+            <button
+              className="py-2 px-4 bg-black text-white rounded w-max float-right"
+              onClick={(e) => e.preventDefault()}
+            >
+              Bình luận
+            </button>
+          </div>
+        </form>
+      </div>
+
       <div className="flex flex-col gap-5 p-5">
         {reviews?.map((item) => (
           <div className="flex gap-5">
@@ -60,7 +67,7 @@ export const Comment: React.FC = () => {
                   {item.created_at.slice(0, 10)}
                 </span>
               </div>
-              <p className="max-h-24 md:max-h-36 break-all overflow-auto">
+              <p className="max-h-24 md:max-h-36 break-all lg:break-words overflow-auto">
                 {item.content}
               </p>
             </div>

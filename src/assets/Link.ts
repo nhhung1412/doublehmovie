@@ -11,87 +11,87 @@ type Links = {
 
 
 type Genres = {
-    id: number,
-    name: string
+    idCate: number,
+    nameCate: string
 }
 
 export const Genres: Genres[] = [
 
     {
-        id: 28,
-        name: "Action"
+        idCate: 28,
+        nameCate: "Hành động"
     },
     {
-        id: 12,
-        name: "Adventure"
+        idCate: 12,
+        nameCate: "Cuộc phiêu lưu"
     },
     {
-        id: 16,
-        name: "Animation"
+        idCate: 16,
+        nameCate: "Hoạt hình"
     },
     {
-        id: 35,
-        name: "Comedy"
+        idCate: 35,
+        nameCate: "Hài kịch"
     },
     {
-        id: 80,
-        name: "Crime"
+        idCate: 80,
+        nameCate: "Tội phạm"
     },
     {
-        id: 99,
-        name: "Documentary"
+        idCate: 99,
+        nameCate: "Phim tài liệu"
     },
     {
-        id: 18,
-        name: "Drama"
+        idCate: 18,
+        nameCate: "Kịch"
     },
     {
-        id: 10751,
-        name: "Family"
+        idCate: 10751,
+        nameCate: "Gia đình"
     },
     {
-        id: 14,
-        name: "Fantasy"
+        idCate: 14,
+        nameCate: "Giả tưởng"
     },
     {
-        id: 36,
-        name: "History"
+        idCate: 36,
+        nameCate: "Lịch sử"
     },
     {
-        id: 27,
-        name: "Horror"
+        idCate: 27,
+        nameCate: "Kinh dị"
     },
     {
-        id: 10402,
-        name: "Music"
+        idCate: 10402,
+        nameCate: "Âm nhạc"
     },
     {
-        id: 9648,
-        name: "Mystery"
+        idCate: 9648,
+        nameCate: "Viễn tưởng"
     },
     {
-        id: 10749,
-        name: "Romance"
+        idCate: 10749,
+        nameCate: "Lãng mạn"
     },
     {
-        id: 878,
-        name: "Science Fiction"
+        idCate: 878,
+        nameCate: "Bí ẩn"
     },
     {
-        id: 10770,
-        name: "TV Movie"
+        idCate: 10770,
+        nameCate: "TV Movie"
     },
     {
-        id: 53,
-        name: "Thriller"
+        idCate: 53,
+        nameCate: "Giật gân"
     },
     {
-        id: 10752,
-        name: "War"
+        idCate: 10752,
+        nameCate: "Chiến tranh"
     },
     {
-        id: 37,
-        name: "Western"
+        idCate: 37,
+        nameCate: "Miền tây"
     }
 
 ]
@@ -110,8 +110,8 @@ export const LinkFooter: LinkFooter = [
                 name: "Phim chiếu rạp",
                 path: "/phimchieurap"
             }, {
-                name: "Phim thịnh hành",
-                path: "/phimle"
+                name: "Phim hoạt hình",
+                path: "/genre/16/Hoạt%20hình"
             },
         ]
     },
@@ -120,16 +120,16 @@ export const LinkFooter: LinkFooter = [
         links: [
             {
                 name: "Hành động",
-                path: "/hanhdong"
+                path: "/genre/28/Hành%20động"
             }, {
-                name: "Tình cảm",
-                path: "/tinhcam"
+                name: "Lãng mạn",
+                path: "/genre/10749/Lãng%20mạn"
             }, {
-                name: "Hài hước",
-                path: "/haihuoc"
+                name: "Hài kịch",
+                path: "/genre/35/Hài%20kịch"
             }, {
                 name: "Ma - Kinh dị",
-                path: "/ma-kinhdi"
+                path: "/genre/27/Kinh%20dị"
             },
         ]
     },
@@ -138,17 +138,17 @@ export const LinkFooter: LinkFooter = [
         links: [
             {
                 name: "Trang chính",
-                path: "/trangchinh"
+                path: ""
             },
             {
                 name: "Hỏi đáp",
-                path: "/hoidap"
+                path: ""
             }, {
                 name: "Liên hệ",
-                path: "/lienhe"
+                path: ""
             }, {
                 name: "Tin tức",
-                path: "/tintuc"
+                path: ""
             }
         ]
     },

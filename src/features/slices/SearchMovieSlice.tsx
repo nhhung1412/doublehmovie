@@ -9,7 +9,7 @@ export const MovieSlices = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    addMovies: (state, action: PayloadAction<Imovies>) => {
+    searchMovie: (state, action: PayloadAction<Imovies>) => {
       const movie = action.payload
       //   state.movies = action.payload
       state.movies.push(movie)
@@ -22,5 +22,5 @@ export const MovieSlices = createSlice({
 
 export const getAllMovies = (state = initialState) => state.movies
 
-export const { addMovies } = MovieSlices.actions
+export const { searchMovie } = MovieSlices.actions
 export default MovieSlices.reducer

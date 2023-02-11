@@ -1,4 +1,4 @@
-import { Genres, LinkFooter } from '../assets/Link'
+import { LinkFooter } from '../assets/Link'
 import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
 
@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             <div key={link.title}>
               <h3 className="text-red-600 font-bold mb-5">{link.title}</h3>
               <ul>
-                {link.links.map((item) => (
+                {link?.links?.map((item) => (
                   <Link
                     key={item.name}
                     to={item.path}
@@ -30,13 +30,6 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
           ))}
-          <ul>
-            {Genres?.map((item) => (
-              <li key={item.id}>
-                <Link to={`/genre/${item?.id}/${item?.name}`}>{item.name}</Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </footer>

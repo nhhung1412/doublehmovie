@@ -15,7 +15,6 @@ export const PhimLe: React.FC = () => {
       .then((res) => setMovies(res.data.results))
       .catch((error) => console.log(error.message))
   }, [])
-  console.log(movies)
 
   return (
     <Helmet title="Phim lẻ">

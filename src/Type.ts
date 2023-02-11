@@ -68,3 +68,19 @@ export interface IapiImg {
     originalImage: (imgPath: string) => string
     w500Image: (imgPath: string) => string
 }
+
+
+export interface Ireviews {
+    length: number
+    author: string
+    author_details: IauthorDetail
+    content: string
+    created_at: string
+}
+
+interface IauthorDetail {
+    name: string
+    username: string
+    avatar_path: string
+    rating: number
+}
