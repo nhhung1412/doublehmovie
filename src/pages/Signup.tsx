@@ -31,6 +31,15 @@ export const Signup: React.FC = () => {
 
   const navigate = useNavigate()
 
+  const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      toast.error('Select a file')
+      return
+    } else {
+      setFile(e.target.files[0])
+    }
+  }
+
   useEffect(() => {
     setLoading(true)
     const getBanner = async () => {
@@ -142,11 +151,7 @@ export const Signup: React.FC = () => {
               />
 
               <label className="flex flex-row-reverse justify-around items-center gap-5 md:p-2 lg:p-5 border rounded w-full">
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  className="hidden"
-                />
+                <input type="file" onChange={onChangeFile} className="hidden" />
                 <p className="text-white font-semibold">Chọn ảnh đại diện</p>
                 <img
                   src={
