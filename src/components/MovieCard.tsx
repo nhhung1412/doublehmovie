@@ -8,6 +8,8 @@ import { Rating } from './Rating'
 
 import { apiImg } from '../api/requests'
 
+import { useAuth } from '../hooks/useAuth'
+
 export const MovieCard: React.FC<ImovieCard> = ({ movie }) => {
   return (
     <div className="relative">

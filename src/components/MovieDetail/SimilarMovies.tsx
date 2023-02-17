@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { API_KEY } from '../../api/requests'
 import { axiosClient } from '../../api/axios'
 
+import { RotatingLines } from 'react-loader-spinner'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
 import 'swiper/css'
@@ -12,15 +14,28 @@ import 'swiper/css/navigation'
 import { MovieCard } from '../MovieCard'
 import { Imovies } from '../../Type'
 
+import { toast } from 'react-toastify'
+
 export const SimilarMovies: React.FC = () => {
   const [similarMovies, setSimilarMovies] = useState<Imovies[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const { id } = useParams()
 
   useEffect(() => {
-    axiosClient
-      .get(`/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=4`)
-      .then((res) => setSimilarMovies(res.data.results))
-      .catch((error) => console.log(error.message))
+    setLoading(true)
+    const getSimilarMovies = async () => {
+      try {
+        const res = await axiosClient.get(
+          `/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=4`,
+        )
+        setLoading(false)
+        setSimilarMovies(res?.data?.results)
+      } catch (error) {
+        setLoading(false)
+        toast.error('error')
+      }
+    }
+    getSimilarMovies()
   }, [id])
 
   return (
@@ -56,11 +71,23 @@ export const SimilarMovies: React.FC = () => {
           },
         }}
       >
-        {similarMovies?.map((item) => (
-          <SwiperSlide key={item?.id} className="overflow-hidden">
-            <MovieCard movie={item} />
-          </SwiperSlide>
-        ))}
+        {loading ? (
+          <RotatingLines
+            strokeColor="red"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        ) : (
+          <>
+            {similarMovies?.map((item) => (
+              <SwiperSlide key={item?.id} className="overflow-hidden">
+                <MovieCard movie={item} />
+              </SwiperSlide>
+            ))}
+          </>
+        )}
       </Swiper>
     </>
   )

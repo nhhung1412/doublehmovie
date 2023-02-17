@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
-
+import { RotatingLines } from 'react-loader-spinner'
 import { axiosClient } from '../api/axios'
 
 import { IoMdArrowDroprightCircle } from 'react-icons/io'
@@ -13,6 +13,9 @@ import { Imovies, IMovieListing } from '../Type'
 import { MovieCard } from './MovieCard'
 import { Link } from 'react-router-dom'
 
+import { toast } from 'react-toastify'
+import { motion } from 'framer-motion'
+
 export const MovieListing: React.FC<IMovieListing> = ({
   title,
   fetchUrl,
@@ -20,12 +23,21 @@ export const MovieListing: React.FC<IMovieListing> = ({
   linkUrl,
 }) => {
   const [movies, setMovies] = useState<Imovies[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    axiosClient
-      .get(fetchUrl)
-      .then((res) => setMovies(res?.data.results))
-      .catch((error) => console.log(error.message))
+    setLoading(true)
+    const getMoviesList = async () => {
+      try {
+        const res = await axiosClient.get(fetchUrl)
+        setLoading(false)
+        setMovies(res?.data?.results)
+      } catch (error) {
+        setLoading(false)
+        toast.error('error')
+      }
+    }
+    getMoviesList()
   }, [])
 
   return (
@@ -39,22 +51,26 @@ export const MovieListing: React.FC<IMovieListing> = ({
 
           <div className="md:flex gap-4 hidden">
             {category?.map((item, index) => (
-              <button
+              <motion.button
+                whileTap={{ scale: 1.3 }}
                 className=" py-[2px] px-1 bg-gray text-white hover:bg-red-600 transition"
                 key={index}
               >
                 <span className="capitalize md:text-xs lg:text-sm">{item}</span>
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
 
-        <button className="py-1 px-2 md:py-2 md:px-3 bg-gray text-white hover:text-red-600 flex gap-1 transition">
+        <motion.button
+          whileTap={{ scale: 1.3 }}
+          className="py-1 px-2 md:py-2 md:px-3 bg-gray text-white hover:text-red-600 flex gap-1 transition"
+        >
           <Link to={linkUrl} className="text-[10px] lg:text-xs font-bold">
             Xem tất cả
           </Link>
           <IoMdArrowDroprightCircle />
-        </button>
+        </motion.button>
       </div>
 
       {/* bottom */}
@@ -86,11 +102,23 @@ export const MovieListing: React.FC<IMovieListing> = ({
           },
         }}
       >
-        {movies.map((movie) => (
-          <SwiperSlide key={movie?.id} className="overflow-hidden">
-            <MovieCard movie={movie} />
-          </SwiperSlide>
-        ))}
+        {loading ? (
+          <RotatingLines
+            strokeColor="red"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        ) : (
+          <>
+            {movies.map((movie) => (
+              <SwiperSlide key={movie?.id} className="overflow-hidden">
+                <MovieCard movie={movie} />
+              </SwiperSlide>
+            ))}
+          </>
+        )}
       </Swiper>
     </div>
   )

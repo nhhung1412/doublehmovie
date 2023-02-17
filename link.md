@@ -17,3 +17,13 @@ Let's build Netflix 2.0 with REACT.JS! (Stripe Checkout & Webhooks, Redux, Fires
 https://www.youtube.com/watch?v=HW5roUF2RLg
 
 https://phimcoco.com
+
+<RotatingLines
+              strokeColor="red"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="96"
+              visible={true}
+            />
+
+import { RotatingLines } from 'react-loader-spinner'

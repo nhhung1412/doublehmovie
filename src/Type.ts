@@ -13,6 +13,18 @@ export interface ImovieCard {
     movie: Imovies
 }
 
+export interface IMovieDetail extends Imovies {
+    poster_path: string
+    vote_average: number
+    status: string
+    genres: Iitem[]
+}
+
+interface Iitem {
+    name: string
+    id: string
+}
+
 export interface IMovieListing {
     title: string
     fetchUrl: string
@@ -47,22 +59,7 @@ export interface IActor {
 }
 
 
-export interface IMovieDetail {
-    title: string
-    overview: string
-    poster_path: string
-    backdrop_path: string
-    release_date: string
-    vote_average: number
-    status: string
-    genres: Iitem[]
 
-}
-
-interface Iitem {
-    name: string
-    id: string
-}
 
 export interface IapiImg {
     originalImage: (imgPath: string) => string

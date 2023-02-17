@@ -6,14 +6,28 @@ import { Link } from 'react-router-dom'
 import { MovieCard } from '../components/MovieCard'
 import { TopRatedMovie } from '../components/MovieDetail/TopRatedMovie'
 import { Helmet } from '../components/Helmet'
+import { toast } from 'react-toastify'
 
-export const PhimLe: React.FC = () => {
+import { RotatingLines } from 'react-loader-spinner'
+
+export const Movies: React.FC = () => {
   const [movies, setMovies] = useState<Imovies[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+
   useEffect(() => {
-    axiosClient
-      .get(requests.requestPopular)
-      .then((res) => setMovies(res.data.results))
-      .catch((error) => console.log(error.message))
+    setLoading(true)
+    const getMovies = async () => {
+      try {
+        const res = await axiosClient.get(requests?.requestPopular)
+        setLoading(false)
+        setMovies(res?.data?.results)
+      } catch (error) {
+        setLoading(false)
+        toast.error('error')
+      }
+    }
+
+    getMovies()
   }, [])
 
   return (
@@ -27,11 +41,23 @@ export const PhimLe: React.FC = () => {
         </div>
         <div className="border border-red-600 my-5"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ">
-          {movies.map((movie) => (
-            <div className="overflow-hidden">
-              <MovieCard movie={movie} />
-            </div>
-          ))}
+          {loading ? (
+            <RotatingLines
+              strokeColor="red"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="96"
+              visible={true}
+            />
+          ) : (
+            <>
+              {movies.map((movie) => (
+                <div className="overflow-hidden">
+                  <MovieCard movie={movie} />
+                </div>
+              ))}
+            </>
+          )}
         </div>
         <div className="border border-red-600 mt-8"></div>
         <TopRatedMovie />

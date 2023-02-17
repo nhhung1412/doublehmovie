@@ -13,6 +13,12 @@ import { Logo } from './Logo'
 import { motion } from 'framer-motion'
 import { Genres } from '../assets/Link'
 
+import { useAuth } from '../hooks/useAuth'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase.config'
+
+import { toast } from 'react-toastify'
+
 interface ToggleProps {
   handleToggle: () => void
 }
@@ -41,6 +47,11 @@ const ListMenuHeader: React.FC<ToggleProps> = ({ handleToggle }) => {
           Phim chiếu rạp
         </NavLink>
       </li>
+      <li onClick={() => handleToggle()}>
+        <NavLink to="/favorite" className="hover:text-red-600 transition">
+          Yêu thích
+        </NavLink>
+      </li>
       <li className="relative">
         <span
           className="hover:text-red-600 transition cursor-pointer flex items-center gap-1"
@@ -50,7 +61,7 @@ const ListMenuHeader: React.FC<ToggleProps> = ({ handleToggle }) => {
         </span>
         {isActive ? (
           <div
-            className="absolute top-[52px] left-0 md:left-2 lg:left-[-10px] h-max w-max bg-white text-black 
+            className="absolute top-[25px] lg:top-[52px] left-0 md:left-2 lg:left-[-10px] h-max w-max rounded-b-sm bg-white text-black 
           grid grid-cols-1 gap-2 p-3
           lg:gap-4 lg:grid-cols-2
           "
@@ -78,6 +89,21 @@ export const Header: React.FC = () => {
   const [openUser, SetOpenUser] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
 
+  const logout = async () => {
+    try {
+      await signOut(auth).then(() => {
+        SetOpenUser(!openUser)
+
+        toast.success('Đăng xuất thành công!')
+        navigate('/')
+      })
+    } catch (error) {
+      toast.error('Đăng xuất thất bại!')
+    }
+  }
+
+  const { currentUser } = useAuth()
+
   const navigate = useNavigate()
 
   const handleToggle = () => {
@@ -85,7 +111,7 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className="bg-white sticky top-0 r-0 z-50 text-black h-header ">
+    <header className="bg-white sticky top-0 r-0 z-[1000] text-black h-header ">
       <div className="md:container-fluid relative">
         <nav className="flex items-center justify-between min-h-[80px] ml-20 mr-5">
           {/* menu mobile bar */}
@@ -107,11 +133,10 @@ export const Header: React.FC = () => {
           >
             <ul
               className="flex flex-col justify-start items-start 
-              ml-4 gap-4 md:gap-6 text-base md:text-lg 
-              overflow-auto md:overflow-hidden h-[85vh]
-              my-5
-              "
-              // onClick={() => handleToggle()}
+       ml-4 gap-4 md:gap-6 text-base md:text-lg 
+       overflow-auto md:overflow-hidden h-[85vh]
+       my-5
+       "
             >
               <ListMenuHeader handleToggle={handleToggle} />
             </ul>
@@ -187,34 +212,62 @@ export const Header: React.FC = () => {
               onClick={() => SetOpenUser(!openUser)}
             >
               <motion.img
-                whileTap={{ scale: '1.4' }}
-                src={userIcon}
+                whileTap={{ scale: 1.2 }}
+                src={currentUser ? currentUser.photoURL : userIcon}
                 alt="user icon"
-                className="w-8 h-8 object-cover duration-300"
+                className="w-8 h-8 object-cover rounded-full"
               />
               <MdKeyboardArrowDown className="text-base text-gray" />
             </div>
-            {openUser ? (
-              <div
-                className="absolute bottom-[-70px] right-6 bg-white p-2  flex flex-col items-start z-[1000] shadow-shadow
-              "
-              >
-                <motion.button
-                  whileTap={{ scale: '1.1' }}
-                  className="px-3 py-1 w-full border mb-1 rounded-sm"
-                  onClick={() => SetOpenUser(!openUser)}
-                >
-                  <Link to="/signup">Đăng kí </Link>
-                </motion.button>
-                <motion.button
-                  whileTap={{ scale: '1.1' }}
-                  className="px-3 py-1 w-full bg-bgMain text-white rounded-sm"
-                  onClick={() => SetOpenUser(!openUser)}
-                >
-                  <Link to="/login">Đăng nhập </Link>
-                </motion.button>
-              </div>
-            ) : null}
+            <>
+              {openUser ? (
+                <>
+                  {!currentUser ? (
+                    <div className="absolute top-[70px] right-6 bg-white p-2  flex flex-col  gap-1  items-start z-[1000] shadow-shadow">
+                      <motion.button
+                        whileTap={{ scale: 1.1 }}
+                        className="px-3 py-1 w-full border  rounded-sm"
+                        onClick={() => SetOpenUser(!openUser)}
+                      >
+                        <Link to="/signup">Đăng kí</Link>
+                      </motion.button>
+
+                      <motion.button
+                        whileTap={{ scale: 1.1 }}
+                        className="px-3 py-1 w-full bg-bgMain text-white rounded-sm"
+                        onClick={() => SetOpenUser(!openUser)}
+                      >
+                        <Link to="/login">Đăng nhập</Link>
+                      </motion.button>
+                    </div>
+                  ) : (
+                    <div className="absolute top-[70px] right-6 bg-white p-2  flex flex-col gap-1 items-start z-[1000] shadow-shadow">
+                      <div>
+                        <span className="">Xin chào: </span>
+                        <span className="font-semibold">
+                          {currentUser?.displayName}
+                        </span>
+                      </div>
+
+                      <motion.button
+                        whileTap={{ scale: 1.1 }}
+                        className="px-3 py-1 w-full border  rounded-sm bg-transparent text-black"
+                        onClick={() => SetOpenUser(!openUser)}
+                      >
+                        <Link to="/favorite">Danh sách yêu thích </Link>
+                      </motion.button>
+                      <motion.button
+                        whileTap={{ scale: 1.1 }}
+                        className="px-3 py-1 w-full border  rounded-sm bg-bgMain text-white"
+                        onClick={logout}
+                      >
+                        <span>Đăng xuất </span>
+                      </motion.button>
+                    </div>
+                  )}
+                </>
+              ) : null}
+            </>
           </div>
         </nav>
       </div>

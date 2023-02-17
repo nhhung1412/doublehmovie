@@ -42,7 +42,7 @@ export const Home: React.FC = () => {
             title="Thịnh hành"
             fetchUrl={requests.requestTopRated}
             category={['phim lẻ thịnh hành', 'phim bộ thịnh hành']}
-            linkUrl="/phimle"
+            linkUrl="/phimchieurap"
           />
         </div>
       </Fragment>

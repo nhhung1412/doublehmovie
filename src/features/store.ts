@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MovieReducer from "./slices/SearchMovieSlice";
+import FavoriteMoviesSlice from "./slices/FavoriteMoviesSlice";
+
 
 export const store = configureStore({
     reducer: {
-        movies: MovieReducer
-    }
+        favoriteMovies: FavoriteMoviesSlice
+    },
+
 })
 
 export type RootState = ReturnType<typeof store.getState>

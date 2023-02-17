@@ -8,17 +8,30 @@ import { Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
+import { toast } from 'react-toastify'
+import { RotatingLines } from 'react-loader-spinner'
+
 import { MovieCard } from '../MovieCard'
 
 export const TopRatedMovie: React.FC = () => {
   const [topRatedMovies, setTopRatedMovies] = useState<Imovies[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    axiosClient
-      .get(requests.requestTopRated)
-      .then((res) => setTopRatedMovies(res.data.results))
-      .catch((error) => console.log(error.message))
+    setLoading(true)
+    const getTopRatedMovies = async () => {
+      try {
+        const res = await axiosClient.get(requests.requestTopRated)
+        setLoading(false)
+        setTopRatedMovies(res?.data?.results)
+      } catch (error) {
+        setLoading(false)
+        toast.error('error')
+      }
+    }
+    getTopRatedMovies()
   }, [])
+
   return (
     <>
       <h1 className="p-2 text-xl font-bold text-red-600 uppercase">
@@ -53,11 +66,23 @@ export const TopRatedMovie: React.FC = () => {
           },
         }}
       >
-        {topRatedMovies?.map((item) => (
-          <SwiperSlide key={item?.id} className="overflow-hidden">
-            <MovieCard movie={item} />
-          </SwiperSlide>
-        ))}
+        {loading ? (
+          <RotatingLines
+            strokeColor="red"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        ) : (
+          <>
+            {topRatedMovies?.map((item) => (
+              <SwiperSlide key={item?.id} className="overflow-hidden">
+                <MovieCard movie={item} />
+              </SwiperSlide>
+            ))}
+          </>
+        )}
       </Swiper>
     </>
   )
