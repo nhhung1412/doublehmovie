@@ -5,13 +5,17 @@ import { MovieCard } from '../components/MovieCard'
 import { TopRatedMovie } from '../components/MovieDetail/TopRatedMovie'
 import { useAppSelector } from '../hooks/useAppSelector'
 
-import { removeFavoriteMovie } from '../features/slices/FavoriteMoviesSlice'
+import {
+  clearAllMovies,
+  removeFavoriteMovie,
+} from '../features/slices/FavoriteMoviesSlice'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { motion } from 'framer-motion'
 
 export const FavoriteLists = () => {
   const movies = useAppSelector((state) => state.favoriteMovies.favoriteMovies)
   const dispatch = useAppDispatch()
+
   return (
     <Helmet title="Danh sách yêu thích">
       <div className="mx-5 md:mx-10 my-5">
@@ -20,6 +24,13 @@ export const FavoriteLists = () => {
             <Link to={'/'}>DoubleHMovie</Link> {'>'}
           </span>{' '}
           <span>Danh sách yêu thích</span>
+          <motion.button
+            whileTap={{ scale: 1.2 }}
+            className="w-full mt-2 md:mt-0 md:w-max md:float-right bg-red-600 py-2 px-4 text-base rounded-full"
+            onClick={() => dispatch(clearAllMovies())}
+          >
+            Xóa hết
+          </motion.button>
         </div>
         <div className="border border-red-600 my-5"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">

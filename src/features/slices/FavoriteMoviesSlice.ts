@@ -30,9 +30,14 @@ const FavoriteMoviesSlice = createSlice({
             state.favoriteMovies = newFavoriteList
             toast.success('Đã xóa!')
             localStorage.setItem("favoriteMovies", JSON.stringify(state.favoriteMovies));
+        },
+        clearAllMovies: (state) => {
+            state.favoriteMovies = []
+            toast.error('Đã xóa hết!')
+            localStorage.setItem("favoriteMovies", JSON.stringify(state.favoriteMovies));
         }
     }
 })
 
-export const { addFavoriteMovie, removeFavoriteMovie } = FavoriteMoviesSlice.actions
+export const { addFavoriteMovie, removeFavoriteMovie, clearAllMovies } = FavoriteMoviesSlice.actions
 export default FavoriteMoviesSlice.reducer
